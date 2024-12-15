@@ -1,0 +1,419 @@
+local WindUI = loadstring(game:HttpGet("https://tree-hub.vercel.app/api/UI/WindUI"))()
+
+local Window = WindUI:CreateWindow({
+    Title = "WindUI Library", -- UI Title
+    Icon = "door-open", -- Url or rbxassetid or lucide
+    Author = ".ftgs", -- Author & Creator
+    Folder = "CloudHub", -- Folder name for saving data (And key)
+    Size = UDim2.fromOffset(580, 460), -- UI Size
+    KeySystem = { -- Creates key system
+        Key = "1234", -- key
+        Note = "The Key is 1234", -- Note
+        URL = "https://github.com/Footagesus/WindUI", -- URL To get key (example: Discord)
+        SaveKey = true, -- Saves the key in the folder specified above
+    }, 
+    Transparent = true,-- UI Transparency
+    Theme = "Dark", -- UI Theme
+    SideBarWidth = 200, -- UI Sidebar Width (number)
+    HasOutline = false, -- Adds Oultines to the window
+})
+
+Window:EditOpenButton({
+    Title = "Open Button",
+    --Icon = "door-closed",
+    Color = ColorSequence.new(
+        Color3.fromHex("FF0F7B"), 
+        Color3.fromHex("F89B29")
+    )
+})
+
+-- Tabs
+
+--- Section for Tabs
+
+local MainTab = Window:Tab({
+    Title = "Main",
+    Icon = "house",
+})
+
+Window:SelectTab(1)
+
+local EmptyTab = Window:Tab({
+    Title = "Empty Tab",
+    Icon = "frown",
+})
+
+local EmptyTab2 = Window:Tab({
+    Title = "Tab Without icon",
+})
+
+local NotificationTab = Window:Tab({
+    Title = "Notification Tab",
+    Icon = "bell",
+})
+
+local BlockedElementsTab = Window:Tab({
+    Title = "Blocked Elements",
+    Icon = "rbxassetid://120011858138977",
+})
+
+local Divider = Window:Divider()
+
+local TabWithNewIcon = Window:Tab({
+    Title = "Tab with new Icon",
+    Icon = "book-user",
+})
+
+local Divider = Window:Divider()
+
+local WindowTab = Window:Tab({
+    Title = "Window and File Configuration",
+    Icon = "settings",
+})
+local CreateThemeTab = Window:Tab({
+    Title = "Create theme",
+    Icon = "palette",
+})
+
+local Divider = Window:Divider()
+
+for i=1, 20 do
+    Window:Tab({
+        Title = "Just An Empty Tab",
+        Image = "grid"
+    })
+end
+
+-- Main Tab
+
+MainTab:Section({ 
+    Title = "Big section!",
+    TextSize = 22,
+})
+MainTab:Section({ 
+    Title = "Section Left",
+    TextXAlignment = "Left"
+})
+MainTab:Section({ 
+    Title = "Section Center",
+    TextXAlignment = "Center"
+})
+MainTab:Section({ 
+    Title = "Section Right",
+    TextXAlignment = "Right"
+})
+
+MainTab:Section({ Title = "Paragraphs" })
+
+local Paragraph1 = MainTab:Paragraph({
+    Title = "Paragraph",
+    Desc = "Paragraph Content \nAnd second line",
+})
+local Paragraph = MainTab:Paragraph({
+    Title = "Paragraph without content",
+})
+
+MainTab:Section({ Title = "Code" })
+
+MainTab:Code({
+    Title = "main.lua",
+    Code = [[-- This is a simple Lua script
+local message = "hi"
+print(message)
+
+-- Condition check
+if message == "hi" then
+    print("Hello, world!")
+end
+
+local function pisun(a,b)
+    return print(a,b)
+end
+
+pisun("hello", "world")]],
+})
+
+MainTab:Code({
+    Title = "Example.lua",
+    Code = [[local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/refs/heads/main/dist/main.lua"))()
+
+local Window = WindUI:CreateWindow({
+    Title = "WindUI Library", -- UI Title
+    Icon = "image", -- Url or rbxassetid or lucide
+    Author = ".ftgs", -- Author & Creator
+    Folder = "CloudHub", -- Folder name for saving data (And key)
+    Size = UDim2.fromOffset(580, 460), -- UI Size
+    KeySystem = { -- Creates key system
+        Key = "1234", -- key
+        Note = "The Key is 1234", -- Note
+        URL = "https://github.com/Footagesus/WindUI", -- URL To get key (example: Discord)
+        SaveKey = true, -- Saves the key in the folder specified above
+    }, 
+    Transparent = true,-- UI Transparency
+    Theme = "Dark", -- UI Theme
+    SideBarWidth = 170, -- UI Sidebar Width (number)
+    HasOutline = true, -- Adds Oultines to the window
+})
+
+]],
+})
+
+Paragraph1:SetTitle("New Title!")
+Paragraph1:SetDesc("New Description!")
+
+
+MainTab:Section({ Title = "Buttons" })
+
+local Dialog = Window:Dialog({
+    Title = "Dialog haha",
+    Content = "Dialog Content",
+    Buttons = {
+        {
+            Title = "Confirm",
+            Callback = function()
+                print("confirm")
+            end
+        },
+        {
+            Title = "Cancel",
+            Callback = function()
+                print("cancel")
+            end
+        },
+        {
+            Title = "Idk",
+            Callback = function()
+                print("idk")
+            end
+        }
+    }
+})
+
+local Button = MainTab:Button({
+    Title = "Button Main",
+    Desc = "Button Desc",
+    Callback = function()
+        Dialog:Open()
+    end,
+})
+local ButtonClose = MainTab:Button({
+    Title = "Button Main Close Window",
+    Callback = function()
+        Window:Close():Destroy()
+    end,
+})
+
+
+MainTab:Section({ Title = "Toggles" })
+
+local Button = MainTab:Toggle({
+    Title = "Toggle Main",
+    Callback = function(state)
+        print(state)
+    end,
+})
+local Button = MainTab:Toggle({
+    Title = "Toggle Main",
+    Desc = "Toggle Desc Main",
+    Value = true,
+    Callback = function(state)
+        if state then
+            print("True State")
+        else
+            print("False State")
+        end
+    end,
+})
+
+
+MainTab:Section({ Title = "Sliders" })
+
+local Slider = MainTab:Slider({
+    Title = "Slider FieldOfView",
+    Step = 1,
+    Value = {
+        Min = 20,
+        Max = 120,
+        Default = 70,
+    },
+    Callback = function(value)
+        game.Workspace.Camera.FieldOfView = value
+    end
+})
+
+local Slider = MainTab:Slider({
+    Title = "Slider Main FieldOfView",
+    Desc = "Slider Main Desc",
+    Step = 1,
+    Value = {
+        Min = 16,
+        Max = 500,
+        Default = 16,
+    },
+    Callback = function(value)
+        game.Workspace[game.Players.LocalPlayer.Name].Humanoid.WalkSpeed = value
+    end
+})
+
+
+MainTab:Section({ Title = "Keybinds" })
+
+local KeybindClicked = false
+local Keybind = MainTab:Keybind({
+    Title = "Keybind Toggle UI",
+    Desc = "Keybind Toggle UI Desc",
+    Value = "LeftShift",
+    CanChange = true,
+    Callback = function(k)
+        if not KeybindClicked then
+            Window:Close()
+        else
+            Window:Open()
+        end
+        KeybindClicked = not KeybindClicked
+    end
+})
+local Keybind = MainTab:Keybind({
+    Title = "Keybind Toggle UI",
+    Value = "F",
+    CanChange = true,
+    Callback = function(k)
+        print(k)
+    end
+})
+
+
+MainTab:Section({ Title = "Inputs" })
+
+local Input = MainTab:Input({
+    Title = "Input Notify",
+    Desc = "Input Notify Desc",
+    Value = "Text Hello",
+    PlaceholderText = "Enter your message ahhh",
+    ClearTextOnFocus = true, -- muahahahaah
+    Callback = function(Text)
+        WindUI:Notify({
+            Title = "Input message",
+            Content = "Message: " .. Text,
+            Duration = 5,
+        })
+    end
+})
+local Input = MainTab:Input({
+    Title = "Input Notify 2",
+    Value = "",
+    PlaceholderText = "Enter your message ahhh",
+    ClearTextOnFocus = false,
+    Callback = function(Text)
+        WindUI:Notify({
+            Title = "Input message 2",
+            Content = "Message: " .. Text,
+            Duration = 5,
+        })
+    end
+})
+
+
+MainTab:Section({ Title = "Dropdowns" })
+
+local Dropdown = MainTab:Dropdown({
+    Title = "Dropdown",
+    Desc = "Dropdown Desc",
+    Multi = false,
+    Value = "Tab 1",
+    AllowNone = true,
+    Values = {
+        "Tab 1", "Tab 2", "Tab 3", "Tab 4", "Tab 5", "Tab 6", "Tab 7", "Tab 8", "Tab 9", "Tab 10",
+        "Tab 11", "Tab 12", "Tab 13", "Tab 14", "Tab 15", "Tab 16", "Tab 17", "Tab 18", "Tab 19", "Tab 20"
+    },
+    Callback = function(Tab)
+        WindUI:Notify({
+            Title = "Dropdown Select",
+            Content = "Selected: " .. Tab,
+            Duration = 2,
+        })
+    end
+})
+
+MainTab:Button({
+    Title = "Refresh Dropdown ↑",
+    Callback = function()
+        local someItems = {}
+        
+        for i = 1, 100 do
+            table.insert(someItems, "Item blablablabla " .. i)
+        end
+
+        Dropdown:Refresh(someItems)
+    end
+})
+
+local Dropdown = MainTab:Dropdown({
+    Title = "Dropdown 2",
+    Desc = "Dropdown Desc 2",
+    Multi = true,
+    Value = {
+        "Tab 1", "Tab 5"
+    },
+    Values = {
+        "Tab 1", "Tab 2", "Tab 3", "Tab 4", "Tab 5", 
+    },
+    Callback = function(Tab)
+        WindUI:Notify({
+            Title = "Dropdown Select 2",
+            Content = "Selected: " .. game:GetService("HttpService"):JSONEncode(Tab),
+            Duration = 2,
+        })
+    end
+})
+
+MainTab:Section({ Title = "Colorpickers" })
+
+local Colorpicker = MainTab:Colorpicker({
+    Title = "Colorpicker",
+    Default = Color3.fromRGB(255, 129, 0),
+    Callback = function(color)
+        WindUI:Notify({
+            Title = "Colorpicker Callback",
+            Content = "Color: \nR: " .. math.floor(color.R * 255) .. "\nG: " .. math.floor(color.G * 255) .. "\nB: " .. math.floor(color.B * 255),
+            Duration = 6,
+        })
+    end
+})
+
+local Colorpicker2 = MainTab:Colorpicker({
+    Title = "Colorpicker",
+    Desc = "Colorpicker Desc Transparency",
+    Transparency = 0.5,
+    Default = Color3.fromRGB(96, 205, 255),
+    Callback = function(color, transparency)
+        WindUI:Notify({
+            Title = "Colorpicker Callback 2",
+            Content = "Color: \nR: " .. math.floor(color.R * 255) .. "\nG: " .. math.floor(color.G * 255) .. "\nB: " .. math.floor(color.B * 255) .. "\nTransparency: " .. transparency,
+            Duration = 6,
+        })
+    end
+})
+
+-- Notification Tab
+
+
+local Button = NotificationTab:Button({
+    Title = "Notify",
+    Desc = "Notify Button Desc",
+    Callback = function()
+        WindUI:Notify({
+            Title = "Notification",
+            Content = "Content",
+            Icon = "eye",
+            Duration = 5,
+        })
+    end,
+})
+local Button = NotificationTab:Button({
+    Title = "Long Notify",
+    Desc = "Long Notify Button Desc",
+    Callback = function()
+        WindUI:Notify({
+            Title = "Notification LONG AND BIG a a a a a ",
+          
